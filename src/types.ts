@@ -3,8 +3,8 @@
  */
 
 export interface ObjectBounds {
-    xMin: number; 
-    xMax: number;
-    yMin: number;
-    yMax: number
+	xMin: number;
+	xMax: number;
+	yMin: number;
+	yMax: number
 }

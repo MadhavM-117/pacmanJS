@@ -1,4 +1,3 @@
-import { drawPacman } from "./lib/sprites";
 import { PACMAN_STATE } from './constants/states';
 import config from './constants/config';
 import Game from "./lib/game";
@@ -10,7 +9,7 @@ const GAME_WIDTH = config.game.width;
 const GAME_HEIGHT = config.game.height;
 
 const game = new Game(GAME_WIDTH, GAME_HEIGHT);
-
+game.start();
 
 let lastTime = 0;
 function gameLoop(timestamp: number) {
