@@ -1,10 +1,11 @@
-import {drawPacman} from "../lib/sprites";
+import {drawPacman} from "./lib/sprites";
+import {PACMAN_STATE} from './constants/states';
 
 let canvas = document.getElementById("gameScreen") as HTMLCanvasElement;
-let context = canvas.getContext("2d");
+let context: CanvasRenderingContext2D = canvas.getContext("2d");
 
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
-drawPacman(context, 20, 20, "open");
-drawPacman(context, 100, 20, "closed");
+drawPacman(context, 20, 20, PACMAN_STATE.OPEN);
+drawPacman(context, 100, 20, PACMAN_STATE.CLOSED);
