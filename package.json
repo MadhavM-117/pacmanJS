@@ -7,7 +7,27 @@
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
     "test": "mocha -r ts-node/register 'test/**/*.ts'",
-    "precommit": "NODE_ENV=production lint-staged"
+    "check-lint": "cross-env NODE_ENV=development eslint --cache --format=pretty --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "check-lint-no-cache": "cross-env NODE_ENV=development eslint --format=pretty --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "check-stylelint": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
+    "run-prettier": "prettier --config .prettierrc --ignore-path .eslintignore --write '**/*.*{js,jsx,ts,tsx,json}'",
+    "run-prettier-styles": "prettier-stylelint --config .prettierrc --ignore-path .eslintignore --write '**/*.{css,scss}'"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": ["yarn check-lint", "yarn run-prettier", "git add"],
+    "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
+      "prettier --ignore-path .eslintignore --parser json --write",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "yarn check-stylelint",
+      "yarn run-prettier-styles",
+      "git add"
+    ],
+    "*.{yml}": [
+      "prettier --ignore-path .eslintignore --single-quote --write",
+      "git add"
+    ]
   },
   "dependencies": {},
   "devDependencies": {
@@ -31,13 +51,6 @@
     "pretty-quick": "^1.11.1",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "pretty-quick --staged",
-      "eslint src/ --fix",
-      "git add"
-    ]
   },
   "keywords": []
 }
