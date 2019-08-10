@@ -33,9 +33,7 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "yarn": "^1.17.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.2.0",
     "@types/mocha": "^5.2.7",
