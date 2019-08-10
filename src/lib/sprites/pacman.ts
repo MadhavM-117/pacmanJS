@@ -2,19 +2,21 @@ import Game from '../game';
 import config from '../../constants/config';
 import { PACMAN_STATE } from '../../constants/states';
 import { ObjectBounds } from '../../types';
-import { getObjectBounds, toRadians } from '../../utils';
+import { getObjectBounds, toRadians, normalizeAngle, calculateSpeed } from '../../utils';
 import BaseSprite from './baseSprite';
 
 const PACMAN_RADIUS = config.pacMan.radius;
 
 export default class Pacman extends BaseSprite {
-	pacmanState: PACMAN_STATE;
+	state: PACMAN_STATE;
+	rotation: number;
 
 	constructor(game: Game) {
 		super(game);
 		this.size = { x: PACMAN_RADIUS, y: PACMAN_RADIUS };
 		this.bounds = getObjectBounds(this.position, this.size);
-		this.pacmanState = PACMAN_STATE.OPEN;
+		this.state = PACMAN_STATE.OPEN;
+		this.rotation = 0;
 	}
 
 	reset() {
@@ -22,16 +24,15 @@ export default class Pacman extends BaseSprite {
 			x: this.gameWidth / 2.0,
 			y: this.gameHeight / 2.0
 		}
-		this.speed = {
-			x: 2.0,
-			y: 0.0
-		}
+		this.speed = calculateSpeed(this.rotation);
 	}
 
 	draw(context: CanvasRenderingContext2D): void {
 		const { x, y } = this.position;
-		let openAngle = this.pacmanState === PACMAN_STATE.OPEN ? toRadians(30) : toRadians(5);
-		let closeAngle = this.pacmanState === PACMAN_STATE.OPEN ? toRadians(330) : toRadians(355);
+		let openAngle = this.rotation + (this.state === PACMAN_STATE.OPEN ? 30 : 5);
+		let closeAngle = this.rotation + (this.state === PACMAN_STATE.OPEN ? 330 : 355);
+		openAngle = normalizeAngle(openAngle);
+		closeAngle = normalizeAngle(closeAngle);
 		context.beginPath();
 		context.moveTo(x, y);
 		context.arc(x, y, PACMAN_RADIUS, openAngle, closeAngle);
@@ -56,7 +57,4 @@ export default class Pacman extends BaseSprite {
 	detectWallCollision(): boolean {
 		return false;
 	}
-
-
-
 }

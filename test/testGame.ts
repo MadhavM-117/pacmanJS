@@ -2,10 +2,9 @@ import Game from "../src/lib/game";
 import { GAME_STATE, PACMAN_STATE } from '../src/constants/states';
 import { expect } from 'chai';
 import config from "../src/constants/config";
+import "mocha";
 
 const PACMAN_RADIUS = config.pacMan.radius;
-
-import "mocha";
 
 function defaultGame() {
   return new Game(200, 400);

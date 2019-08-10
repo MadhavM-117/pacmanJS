@@ -5,6 +5,7 @@ const config = {
   },
   pacMan: {
     radius: 15,
+    defaultSpeed: 2.0
   }
 };
 
