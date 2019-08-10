@@ -1,6 +1,6 @@
 const config = {
   game: {
-    width: 800, 
+    width: 800,
     height: 600
   },
   pacMan: {
