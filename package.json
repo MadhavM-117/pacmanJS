@@ -6,16 +6,55 @@
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
-    "test": "mocha -r ts-node/register 'test/**/*.ts'"
+    "test": "mocha -r ts-node/register 'test/**/*.ts'",
+    "check-lint": "NODE_ENV=development eslint --cache --format=pretty --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "check-lint-no-cache": "NODE_ENV=development eslint --format=pretty --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "check-stylelint": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
+    "run-prettier": "prettier --config .prettierrc --ignore-path .eslintignore --write '**/*.*{js,jsx,ts,tsx,json}'",
+    "run-prettier-styles": "prettier-stylelint --config .prettierrc --ignore-path .eslintignore --write '**/*.{css,scss}'"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn check-lint",
+      "yarn run-prettier",
+      "git add"
+    ],
+    "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
+      "prettier --ignore-path .eslintignore --parser json --write",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "yarn check-stylelint",
+      "yarn run-prettier-styles",
+      "git add"
+    ],
+    "*.{yml}": [
+      "prettier --ignore-path .eslintignore --single-quote --write",
+      "git add"
+    ]
   },
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.2.0",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.1",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
     "chai": "^4.2.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-formatter-pretty": "^2.1.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.3",
+    "lint-staged": "^9.2.1",
     "mocha": "^6.2.0",
     "parcel-bundler": "^1.6.1",
+    "prettier": "^1.18.2",
+    "prettier-stylelint": "^0.4.2",
+    "pretty-quick": "^1.11.1",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   },
