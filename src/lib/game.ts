@@ -8,8 +8,6 @@ export default class Game {
   currentLevel: number;
   pacman: Pacman;
 
-
-
   constructor(gameWidth, gameHeight) {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;

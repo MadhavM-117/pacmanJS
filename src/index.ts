@@ -1,9 +1,9 @@
 import { PACMAN_STATE } from './constants/states';
 import config from './constants/config';
-import Game from "./lib/game";
+import Game from './lib/game';
 
-let canvas = document.getElementById("gameScreen") as HTMLCanvasElement;
-let context: CanvasRenderingContext2D = canvas.getContext("2d");
+let canvas = document.getElementById('gameScreen') as HTMLCanvasElement;
+let context: CanvasRenderingContext2D = canvas.getContext('2d');
 
 const GAME_WIDTH = config.game.width;
 const GAME_HEIGHT = config.game.height;
@@ -13,17 +13,17 @@ game.start();
 
 let lastTime = 0;
 function gameLoop(timestamp: number) {
-	let deltaTime = timestamp - lastTime;
-	lastTime = timestamp;
+  let deltaTime = timestamp - lastTime;
+  lastTime = timestamp;
 
-	console.log("delta time:", deltaTime/1000);
+  console.log('delta time:', deltaTime / 1000);
 
-	context.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+  context.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-	game.update(deltaTime);
-	game.draw(context);
+  game.update(deltaTime);
+  game.draw(context);
 
-	requestAnimationFrame(gameLoop);
+  requestAnimationFrame(gameLoop);
 }
 
 requestAnimationFrame(gameLoop);
