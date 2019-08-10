@@ -2,13 +2,13 @@ import { GAME_STATE } from '../constants/states';
 import Pacman from '../lib/sprites/pacman';
 
 export default class Game {
-  gameWidth: number;
-  gameHeight: number;
-  gameState: GAME_STATE;
-  currentLevel: number;
-  pacman: Pacman;
+  public gameWidth: number;
+  public gameHeight: number;
+  public gameState: GAME_STATE;
+  public currentLevel: number;
+  public pacman: Pacman;
 
-  constructor(gameWidth, gameHeight) {
+  public constructor(gameWidth: number, gameHeight: number) {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.gameState = GAME_STATE.RUNNING;
@@ -16,21 +16,21 @@ export default class Game {
     this.currentLevel = 0;
   }
 
-  start() {
+  public start(): void {
     // setting things up when game is starting
     this.pacman.reset();
   }
 
-  update(deltaTime: number) {
+  public update(deltaTime: number): void {
     this.pacman.update(deltaTime);
   }
 
-  draw(context: CanvasRenderingContext2D) {
+  public draw(context: CanvasRenderingContext2D): void {
     // central loop where all game objects are drawn
     this.pacman.draw(context);
   }
 
-  togglePause() {
+  public togglePause(): void {
     // allow for game to be paused
   }
 }

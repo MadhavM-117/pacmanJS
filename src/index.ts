@@ -1,4 +1,3 @@
-import { PACMAN_STATE } from './constants/states';
 import config from './constants/config';
 import Game from './lib/game';
 
@@ -12,7 +11,7 @@ const game = new Game(GAME_WIDTH, GAME_HEIGHT);
 game.start();
 
 let lastTime = 0;
-function gameLoop(timestamp: number) {
+function gameLoop(timestamp: number): void {
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
 

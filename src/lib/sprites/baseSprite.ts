@@ -2,16 +2,16 @@ import Game from '../game';
 import { ObjectBounds } from '../../types';
 
 export default abstract class BaseSprite {
-  position: { x: number; y: number };
-  speed: { x: number; y: number };
-  game: Game;
-  gameWidth: number;
-  gameHeight: number;
+  public position: { x: number; y: number };
+  public speed: { x: number; y: number };
+  public game: Game;
+  public gameWidth: number;
+  public gameHeight: number;
   // assuming all sprites are represented by rectangular bounding boxes
-  size: { x: number; y: number };
-  bounds: ObjectBounds;
+  public size: { x: number; y: number };
+  public bounds: ObjectBounds;
 
-  constructor(game: Game) {
+  public constructor(game: Game) {
     this.game = game;
     this.gameHeight = game.gameHeight;
     this.gameWidth = game.gameWidth;

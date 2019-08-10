@@ -8,16 +8,16 @@ import BaseSprite from './baseSprite';
 const PACMAN_RADIUS = config.pacMan.radius;
 
 export default class Pacman extends BaseSprite {
-  pacmanState: PACMAN_STATE;
+  public pacmanState: PACMAN_STATE;
 
-  constructor(game: Game) {
+  public constructor(game: Game) {
     super(game);
     this.size = { x: PACMAN_RADIUS, y: PACMAN_RADIUS };
     this.bounds = getObjectBounds(this.position, this.size);
     this.pacmanState = PACMAN_STATE.OPEN;
   }
 
-  reset() {
+  public reset(): voids {
     this.position = {
       x: this.gameWidth / 2.0,
       y: this.gameHeight / 2.0
@@ -28,7 +28,7 @@ export default class Pacman extends BaseSprite {
     };
   }
 
-  draw(context: CanvasRenderingContext2D): void {
+  public draw(context: CanvasRenderingContext2D): void {
     const { x, y } = this.position;
     let openAngle =
       this.pacmanState === PACMAN_STATE.OPEN ? toRadians(30) : toRadians(5);
@@ -43,7 +43,8 @@ export default class Pacman extends BaseSprite {
     context.closePath();
   }
 
-  update(deltaTime: number): void {
+  // eslint-disable-next-line
+  public update(deltaTime: number): void {
     const { x, y } = this.position;
     this.position = {
       x: x + this.speed.x,
@@ -51,11 +52,12 @@ export default class Pacman extends BaseSprite {
     };
   }
 
-  detectCollision(otherBounds: ObjectBounds): boolean {
+  // eslint-disable-next-line
+  public detectCollision(otherBounds: ObjectBounds): boolean {
     return false;
   }
 
-  detectWallCollision(): boolean {
+  public detectWallCollision(): boolean {
     return false;
   }
 }
