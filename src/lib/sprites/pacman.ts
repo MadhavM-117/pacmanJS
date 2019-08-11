@@ -11,7 +11,7 @@ export default class Pacman extends BaseSprite {
   public state: PACMAN_STATE;
   public rotation: number;
 
-  constructor(game: Game) {
+  public constructor(game: Game) {
     super(game);
     this.size = { x: PACMAN_RADIUS, y: PACMAN_RADIUS };
     this.bounds = getObjectBounds(this.position, this.size);
@@ -43,6 +43,7 @@ export default class Pacman extends BaseSprite {
     context.closePath();
   }
 
+  // eslint-disable-next-line
   public update(deltaTime: number): void {
     const { x, y } = this.position;
     this.position = {
@@ -51,6 +52,7 @@ export default class Pacman extends BaseSprite {
     };
   }
 
+  // eslint-disable-next-line
   public detectCollision(otherBounds: ObjectBounds): boolean {
     return false;
   }
