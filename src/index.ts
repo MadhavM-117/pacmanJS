@@ -15,8 +15,6 @@ function gameLoop(timestamp: number): void {
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
 
-  console.log('delta time:', deltaTime / 1000);
-
   context.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
   game.update(deltaTime);

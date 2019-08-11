@@ -8,3 +8,14 @@ export interface ObjectBounds {
   yMin: number;
   yMax: number;
 }
+
+export interface LevelInfo {
+  style: {
+    color: string;
+  };
+  size: {
+    x: number;
+    y: number;
+  };
+  data: number[][];
+}

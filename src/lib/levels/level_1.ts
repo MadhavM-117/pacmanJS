@@ -1,8 +1,12 @@
-{
-  "style": {
-    "color": "#fff"
+export default {
+  style: {
+    color: '#fff'
   },
-  "data": [
+  size: {
+    x: 20,
+    y: 20
+  },
+  data: [
     [
       1,
       1,
@@ -1264,4 +1268,4 @@
       1
     ]
   ]
-}
+};

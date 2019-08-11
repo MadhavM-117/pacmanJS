@@ -1,5 +1,6 @@
 import { GAME_STATE } from '../constants/states';
 import Pacman from '../lib/sprites/pacman';
+import LevelLoader from './levelLoader';
 
 export default class Game {
   public gameWidth: number;
@@ -19,6 +20,8 @@ export default class Game {
   public start(): void {
     // setting things up when game is starting
     this.pacman.reset();
+    const levelloader = new LevelLoader();
+    levelloader.loadLevel();
   }
 
   public update(deltaTime: number): void {
