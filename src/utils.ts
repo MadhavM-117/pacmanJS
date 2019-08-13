@@ -22,6 +22,21 @@ export function getObjectBounds(
   return bounds;
 }
 
+/**
+ * Function to get the coordinates of a point, with respect to the level data array
+ * @param position Canvas position
+ * @param levelSize Size of a level block, used to transform coordinates
+ */
+export function getLevelCoords(
+  position: { x: number; y: number },
+  levelSize: { x: number; y: number }
+): { x: number; y: number } {
+  return {
+    x: Math.floor(position.x / levelSize.x),
+    y: Math.floor(position.y / levelSize.y)
+  };
+}
+
 export function normalizeAngle(angle: number): number {
   return toRadians(angle > 360 ? angle - 360 : angle);
 }

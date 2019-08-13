@@ -2,7 +2,12 @@ import Game from '../game';
 import config from '../../constants/config';
 import { PACMAN_STATE } from '../../constants/states';
 import { ObjectBounds } from '../../types';
-import { getObjectBounds, normalizeAngle, calculateSpeed } from '../../utils';
+import {
+  getObjectBounds,
+  normalizeAngle,
+  calculateSpeed,
+  getLevelCoords
+} from '../../utils';
 import BaseSprite from './baseSprite';
 
 const PACMAN_RADIUS = config.pacMan.radius;
@@ -13,7 +18,7 @@ export default class Pacman extends BaseSprite {
 
   public constructor(game: Game) {
     super(game);
-    this.size = { x: PACMAN_RADIUS, y: PACMAN_RADIUS };
+    this.size = { x: PACMAN_RADIUS * 2, y: PACMAN_RADIUS * 2 };
     this.bounds = getObjectBounds(this.position, this.size);
     this.state = PACMAN_STATE.OPEN;
     this.rotation = 0;
@@ -50,6 +55,16 @@ export default class Pacman extends BaseSprite {
       x: x + this.speed.x,
       y: y + this.speed.y
     };
+
+    if (this.detectWallCollision()) {
+      // undo motion
+      this.position = { x, y };
+      // stop motion
+      this.speed = {
+        x: 0,
+        y: 0
+      };
+    }
   }
 
   // eslint-disable-next-line
@@ -58,6 +73,30 @@ export default class Pacman extends BaseSprite {
   }
 
   public detectWallCollision(): boolean {
+    const { level } = this.game;
+    const { xMin, xMax, yMin, yMax } = getObjectBounds(
+      this.position,
+      this.size
+    );
+
+    const corners = [[xMin, yMin], [xMin, yMax], [xMax, yMin], [xMax, yMax]];
+
+    const collisions = corners.map((coords): boolean => {
+      const levelCoords = getLevelCoords(
+        { x: coords[0], y: coords[1] },
+        level.size
+      );
+      if (level.data[levelCoords.y][levelCoords.x] === 1) {
+        return true;
+      }
+
+      return false;
+    });
+
+    if (collisions.indexOf(true) > -1) {
+      return true;
+    }
+
     return false;
   }
 }
