@@ -1,6 +1,6 @@
 export default {
   style: {
-    color: '#fff'
+    color: '#0ff'
   },
   size: {
     x: 20,

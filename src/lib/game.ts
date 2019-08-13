@@ -28,7 +28,7 @@ export default class Game {
   public start(): void {
     // setting things up when game is starting
     this.pacman.reset();
-    this.level = LevelLoader.loadLevel(1, this.context);
+    this.level = LevelLoader.loadLevel(0);
   }
 
   public update(deltaTime: number): void {
@@ -37,6 +37,7 @@ export default class Game {
 
   public draw(): void {
     // central loop where all game objects are drawn
+    LevelLoader.drawLevel(this.level, this.context);
     this.pacman.draw(this.context);
   }
 

@@ -4,24 +4,29 @@ import Level1 from './levels/level_1';
 class LevelLoader {
   private static levels: LevelInfo[] = [Level1];
 
-  private static drawLevel(
+  public static drawLevel(
     level: LevelInfo,
     context: CanvasRenderingContext2D
   ): void {
     // add logic to display the level on the map
-    console.info(level, context);
+    const { x: sizeX, y: sizeY } = level.size;
+
+    level.data.forEach((row, y): void => {
+      row.forEach((val, x): void => {
+        if (val === 1) {
+          context.fillStyle = level.style.color;
+          context.fillRect(x * sizeX, y * sizeY, sizeX, sizeY);
+        }
+      });
+    });
   }
 
-  public static loadLevel(
-    levelIndex: number,
-    context: CanvasRenderingContext2D
-  ): LevelInfo {
+  public static loadLevel(levelIndex: number): LevelInfo {
     if (levelIndex > this.levels.length) {
       console.error('LevelIndex out of Range!', levelIndex, this.levels);
       return null;
     }
 
-    this.drawLevel(this.levels[levelIndex], context);
     return this.levels[levelIndex];
   }
 }
