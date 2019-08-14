@@ -1,7 +1,7 @@
 /* eslint-disable */
 // TODO: enable eslint for this file, once the tests are properly implemented
 import Game from '../src/lib/game';
-import { GAME_STATE, PACMAN_STATE } from '../src/constants/states';
+import { GAME_STATE, PACMAN_STATES } from '../src/constants/states';
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import config from '../src/constants/config';
