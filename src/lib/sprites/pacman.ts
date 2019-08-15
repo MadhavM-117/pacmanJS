@@ -6,7 +6,8 @@ import {
   getObjectBounds,
   normalizeAngle,
   calculateSpeed,
-  getLevelCoords
+  getObjectCorners,
+  checkWallExists
 } from '../../utils';
 import BaseSprite from './baseSprite';
 
@@ -74,23 +75,11 @@ export default class Pacman extends BaseSprite {
 
   public detectWallCollision(): boolean {
     const { level } = this.game;
-    const { xMin, xMax, yMin, yMax } = getObjectBounds(
-      this.position,
-      this.size
-    );
 
-    const corners = [[xMin, yMin], [xMin, yMax], [xMax, yMin], [xMax, yMax]];
+    const corners = getObjectCorners(getObjectBounds(this.position, this.size));
 
     const collisions = corners.map((coords): boolean => {
-      const levelCoords = getLevelCoords(
-        { x: coords[0], y: coords[1] },
-        level.size
-      );
-      if (level.data[levelCoords.y][levelCoords.x] === 1) {
-        return true;
-      }
-
-      return false;
+      return checkWallExists(coords, level);
     });
 
     if (collisions.indexOf(true) > -1) {
