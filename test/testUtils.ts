@@ -92,22 +92,31 @@ describe('Utils', () => {
   });
 
   describe('getObjectCorners', () => {
-    const expectedCorners = [
-      { x: -5, y: -5 },
-      { x: -5, y: 5 },
-      { x: 5, y: -5 },
-      { x: 5, y: 5 }
-    ];
+    it('check corners are obtained from bounds', () => {
+      const expectedCorners = [
+        { x: -5, y: -5 },
+        { x: -5, y: 5 },
+        { x: 5, y: -5 },
+        { x: 5, y: 5 }
+      ];
 
-    const actualCorners = getObjectCorners({
-      xMin: -5,
-      xMax: 5,
-      yMin: -5,
-      yMax: 5
-    });
-    actualCorners.forEach((corner: Vector2D) => {
-      // ensure actual corners are all present in the expected corners list
-      expect(expectedCorners.indexOf(corner)).to.be.greaterThan(-1);
+      const actualCorners = getObjectCorners({
+        xMin: -5,
+        xMax: 5,
+        yMin: -5,
+        yMax: 5
+      });
+
+      actualCorners.forEach((corner: Vector2D) => {
+        // ensure actual corners are all present in the expected corners list
+        expect(
+          expectedCorners.find((expectedCorner: Vector2D) => {
+            return (
+              corner.x === expectedCorner.x && corner.y === expectedCorner.y
+            );
+          })
+        ).to.not.be.undefined;
+      });
     });
   });
 });
