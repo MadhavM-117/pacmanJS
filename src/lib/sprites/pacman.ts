@@ -1,6 +1,6 @@
 import Game from '../game';
 import config from '../../constants/config';
-import { PACMAN_STATE } from '../../constants/states';
+import { PACMAN_STATE, DIRECTION } from '../../constants/states';
 import { ObjectBounds } from '../../types';
 import {
   getObjectBounds,
@@ -30,6 +30,11 @@ export default class Pacman extends BaseSprite {
       x: this.gameWidth / 2.0,
       y: this.gameHeight / 2.0
     };
+    this.speed = calculateSpeed(this.rotation);
+  }
+
+  public updateDirection(direction: DIRECTION): void {
+    this.rotation = direction.valueOf();
     this.speed = calculateSpeed(this.rotation);
   }
 

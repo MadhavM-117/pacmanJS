@@ -2,6 +2,7 @@ import { GAME_STATE } from '../constants/states';
 import Pacman from '../lib/sprites/pacman';
 import LevelLoader from './levelLoader';
 import { LevelInfo } from '../types';
+import InputHandler from './input';
 
 export default class Game {
   public gameWidth: number;
@@ -11,6 +12,7 @@ export default class Game {
   public pacman: Pacman;
   public level: LevelInfo;
   public context: CanvasRenderingContext2D;
+  public input: InputHandler;
 
   public constructor(
     gameWidth: number,
@@ -23,6 +25,7 @@ export default class Game {
     this.pacman = new Pacman(this);
     this.currentLevel = 0;
     this.context = context;
+    this.input = new InputHandler(this, this.pacman);
   }
 
   public start(): void {
