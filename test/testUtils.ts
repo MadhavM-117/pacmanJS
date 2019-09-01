@@ -9,6 +9,7 @@ import {
 import 'mocha';
 import { describe, it } from 'mocha';
 import config from '../src/constants/config';
+import { Vector2D } from '../src/types';
 
 describe('Utils', () => {
   describe('calculateSpeed', () => {
@@ -60,6 +61,53 @@ describe('Utils', () => {
       expect(getLevelCoords({ x: -9, y: 18 }, { x: 10, y: 10 })).to.eql(
         expectedCoords
       );
+    });
+  });
+
+  describe('getObjectBounds', () => {
+    it('should get bounds of object at origin', () => {
+      const expectedBounds = {
+        xMin: -5,
+        xMax: 5,
+        yMin: -5,
+        yMax: 5
+      };
+      expect(getObjectBounds({ x: 0, y: 0 }, { x: 10, y: 10 })).to.eql(
+        expectedBounds
+      );
+    });
+
+    it('should get bounds of object with odd size', () => {
+      const expectedBounds = {
+        xMin: -3.5,
+        xMax: 3.5,
+        yMin: -3.5,
+        yMax: 3.5
+      };
+
+      expect(getObjectBounds({ x: 0, y: 0 }, { x: 7, y: 7 })).to.eql(
+        expectedBounds
+      );
+    });
+  });
+
+  describe('getObjectCorners', () => {
+    const expectedCorners = [
+      { x: -5, y: -5 },
+      { x: -5, y: 5 },
+      { x: 5, y: -5 },
+      { x: 5, y: 5 }
+    ];
+
+    const actualCorners = getObjectCorners({
+      xMin: -5,
+      xMax: 5,
+      yMin: -5,
+      yMax: 5
+    });
+    actualCorners.forEach((corner: Vector2D) => {
+      // ensure actual corners are all present in the expected corners list
+      expect(expectedCorners.indexOf(corner)).to.be.greaterThan(-1);
     });
   });
 });
