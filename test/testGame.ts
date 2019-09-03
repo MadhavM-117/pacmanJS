@@ -11,7 +11,7 @@ const PACMAN_RADIUS = config.pacMan.radius;
 import 'mocha';
 
 function defaultGame() {
-  return new Game(200, 400);
+  return new Game(200, 400, null);
 }
 
 describe('Game', function() {

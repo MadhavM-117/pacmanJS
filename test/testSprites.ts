@@ -1,3 +1,5 @@
+/* eslint-disable */
+// TODO: enable eslint for this file, once the tests are properly implemented
 import { expect } from 'chai';
 import Pacman from '../src/lib/sprites/pacman';
 import Game from '../src/lib/game';
@@ -9,7 +11,7 @@ const GAME_WIDTH = config.game.width;
 const GAME_HEIGHT = config.game.height;
 
 describe('pacMan', () => {
-  const game = new Game(GAME_WIDTH, GAME_HEIGHT); //Unsure if this is the right way to unit test
+  const game = new Game(GAME_WIDTH, GAME_HEIGHT, null); //Unsure if this is the right way to unit test
   const pacman = new Pacman(game);
   describe('calculateState', () => {
     it('should change the state from 30 to 25', () => {

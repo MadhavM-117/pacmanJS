@@ -1,8 +1,14 @@
 import Game from '../game';
 import config from '../../constants/config';
-import { PACMAN_STATES } from '../../constants/states';
+import { PACMAN_STATES, DIRECTION } from '../../constants/states';
 import { ObjectBounds } from '../../types';
-import { getObjectBounds, normalizeAngle, calculateSpeed } from '../../utils';
+import {
+  getObjectBounds,
+  normalizeAngle,
+  calculateSpeed,
+  getObjectCorners,
+  checkWallExists
+} from '../../utils';
 import BaseSprite from './baseSprite';
 
 const PACMAN_RADIUS = config.pacMan.radius;
@@ -25,7 +31,7 @@ export default class Pacman extends BaseSprite {
 
   public constructor(game: Game) {
     super(game);
-    this.size = { x: PACMAN_RADIUS, y: PACMAN_RADIUS };
+    this.size = { x: PACMAN_RADIUS * 2, y: PACMAN_RADIUS * 2 };
     this.bounds = getObjectBounds(this.position, this.size);
     this.state = PACMAN_STATES[0];
     this.previousState = 0;
@@ -40,6 +46,11 @@ export default class Pacman extends BaseSprite {
     this.speed = calculateSpeed(this.rotation);
   }
 
+  public updateDirection(direction: DIRECTION): void {
+    this.rotation = direction.valueOf();
+    this.speed = calculateSpeed(this.rotation);
+  }
+
   public draw(context: CanvasRenderingContext2D): void {
     let openAngle = this.rotation + this.state;
     let closeAngle = this.rotation + (360 - this.state);
@@ -48,6 +59,7 @@ export default class Pacman extends BaseSprite {
     drawPacman(context, this.position, openAngle, closeAngle);
   }
 
+  // eslint-disable-next-line
   public update(deltaTime: number): void {
     const { x, y } = this.position;
     this.position = {
@@ -55,6 +67,15 @@ export default class Pacman extends BaseSprite {
       y: y + this.speed.y
     };
     this.calculateState();
+    if (this.detectWallCollision()) {
+      // undo motion
+      this.position = { x, y };
+      // stop motion
+      this.speed = {
+        x: 0,
+        y: 0
+      };
+    }
   }
 
   public calculateState(): void {
@@ -76,11 +97,24 @@ export default class Pacman extends BaseSprite {
     }
   }
 
+  // eslint-disable-next-line
   public detectCollision(otherBounds: ObjectBounds): boolean {
     return false;
   }
 
   public detectWallCollision(): boolean {
+    const { level } = this.game;
+
+    const corners = getObjectCorners(getObjectBounds(this.position, this.size));
+
+    const collisions = corners.map((coords): boolean => {
+      return checkWallExists(coords, level);
+    });
+
+    if (collisions.indexOf(true) > -1) {
+      return true;
+    }
+
     return false;
   }
 }
