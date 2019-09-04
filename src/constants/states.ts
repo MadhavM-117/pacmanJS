@@ -1,6 +1,7 @@
-export enum PACMAN_STATE {
-  OPEN = 'open',
-  CLOSED = 'closed'
+const PACMAN_STATES = [];
+
+for (let i = 30; i > 5; i--) {
+  PACMAN_STATES.push(i);
 }
 
 export enum GAME_STATE {
@@ -11,6 +12,7 @@ export enum GAME_STATE {
   NEWLEVEL = 'NEWLEVEL'
 }
 
+export { PACMAN_STATES };
 export enum DIRECTION {
   LEFT = 180,
   RIGHT = 0,
