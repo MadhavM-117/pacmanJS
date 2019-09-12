@@ -4256,7 +4256,7 @@ is-path-inside@^3.0.1:
   resolved "https://registry.yarnpkg.com/is-path-inside/-/is-path-inside-3.0.1.tgz#7417049ed551d053ab82bba3fdd6baa6b3a81e89"
   integrity sha512-CKstxrctq1kUesU6WhtZDbYKzzYBuRH0UYInAVrkc/EYdB9ltbfE0gOoayG9nhohG6447sOOVGhHqsdmBvkbNg==
 
-is-plain-obj@^1.1.0:
+is-plain-obj@^1.0.0, is-plain-obj@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
   integrity sha1-caUMhCnfync8kqOQpKA7OfzVHT4=
@@ -6577,6 +6577,14 @@ querystring@0.2.0:
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
   integrity sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
 
+quibble@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/quibble/-/quibble-0.5.6.tgz#f692fcf22dc8da832b212cde9b11fe88296bd582"
+  integrity sha512-nAqsl6RxhWK36grfglqEXC0ihA3Q+DaCKeqJti/uz8CpiE92590hx3TRob+z89udYqj3PoUpQvjW77T1IR70mw==
+  dependencies:
+    lodash "^4.17.14"
+    resolve "^1.11.1"
+
 quick-lru@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
@@ -7018,7 +7026,7 @@ resolve-url@^0.2.1:
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
-resolve@^1.1.5, resolve@^1.10.0, resolve@^1.11.0, resolve@^1.3.2, resolve@^1.4.0, resolve@^1.5.0:
+resolve@^1.1.5, resolve@^1.10.0, resolve@^1.11.0, resolve@^1.11.1, resolve@^1.3.2, resolve@^1.4.0, resolve@^1.5.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.12.0.tgz#3fc644a35c84a48554609ff26ec52b66fa577df6"
   integrity sha512-B/dOmuoAik5bKcD6s6nXDCjzUKnaDvdkRyAk6rsmsKLipWj4797iothd7jmmUhWTfinVMU+wc56rYKsit2Qy4w==
@@ -7560,6 +7568,14 @@ stringify-entities@^1.0.1:
     is-alphanumerical "^1.0.0"
     is-hexadecimal "^1.0.0"
 
+stringify-object-es5@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/stringify-object-es5/-/stringify-object-es5-2.5.0.tgz#057c3c9a90a127339bb9d1704a290bb7bd0a1ec5"
+  integrity sha1-BXw8mpChJzObudFwSikLt70KHsU=
+  dependencies:
+    is-plain-obj "^1.0.0"
+    is-regexp "^1.0.0"
+
 stringify-object@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/stringify-object/-/stringify-object-3.3.0.tgz#703065aefca19300d3ce88af4f5b3956d7556629"
@@ -7860,10 +7876,25 @@ terser@^4.1.2:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
+testdouble@^3.12.3:
+  version "3.12.4"
+  resolved "https://registry.yarnpkg.com/testdouble/-/testdouble-3.12.4.tgz#c8b30a62077212c10c2e05dc4105610d28013df4"
+  integrity sha512-Ake1UjvG6XKYUrVGyNv52xg5lQM079dTQW8/F8GWuE1lbC1NRmkUgtgLrsRr+7SPQZZhIhZp6lHUWXMMBvSHEw==
+  dependencies:
+    lodash "^4.17.15"
+    quibble "^0.5.6"
+    stringify-object-es5 "^2.5.0"
+    theredoc "^1.0.0"
+
 text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+theredoc@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/theredoc/-/theredoc-1.0.0.tgz#bcace376af6feb1873efbdd0f91ed026570ff062"
+  integrity sha512-KU3SA3TjRRM932jpNfD3u4Ec3bSvedyo5ITPI7zgWYnKep7BwQQaxlhI9qbO+lKJoRnoAbEVfMcAHRuKVYikDA==
 
 through2@^2.0.0, through2@~2.0.3:
   version "2.0.5"

@@ -62,11 +62,13 @@ export default class Pacman extends BaseSprite {
   // eslint-disable-next-line
   public update(deltaTime: number): void {
     const { x, y } = this.position;
+
     this.position = {
       x: x + this.speed.x,
       y: y + this.speed.y
     };
     this.calculateState();
+
     if (this.detectWallCollision()) {
       // undo motion
       this.position = { x, y };

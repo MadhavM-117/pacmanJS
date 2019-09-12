@@ -1,5 +1,7 @@
 import { LevelInfo } from '../types';
 import Level1 from './levels/level_1';
+import NormalCandy from './sprites/normalCandy';
+import Game from './game';
 
 class LevelLoader {
   private static levels: LevelInfo[] = [Level1];
@@ -28,6 +30,22 @@ class LevelLoader {
     }
 
     return this.levels[levelIndex];
+  }
+
+  public static loadCandy(game: Game): NormalCandy[][] {
+    const { x: sizeX, y: sizeY } = game.level.size;
+
+    return game.level.data.map((row, y): NormalCandy[] => {
+      return row.map(
+        (val, x): NormalCandy => {
+          if (val === 0) {
+            const point = { x: (x + 0.5) * sizeX, y: (y + 0.5) * sizeY };
+            return new NormalCandy(game, point);
+          }
+          return null;
+        }
+      );
+    });
   }
 }
 
